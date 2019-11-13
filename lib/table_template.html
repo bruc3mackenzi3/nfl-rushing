@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <h1>{{ title }}</h1>
+
+    <form action="/rushing">
+      <p>Sort by a given attribute:</p>
+        <input type="radio" name="sortBy" value="none"> None
+        <input type="radio" name="sortBy" value="total_rushing_yards"> Total Rushing Yards
+        <input type="radio" name="sortBy" value="longest_rush"> Longest Rush
+        <input type="radio" name="sortBy" value="total_rushing_touchdowns"> Total Rushing Touchdowns
+
+        <input type="submit" value="Sort">
+      </form>
+
+    <table class="table-dark">
+      <tr>
+        {% for field in rushing_fields %}
+          <th>{{field[-1]}}</th>
+        {% end %}
+      </tr>
+        {% for item in rushing_data %}
+        <tr>
+            {% for field in rushing_fields %}
+              <td>{{item[field[0]]}}</td>
+            {% end %}
+        </tr>
+        {% end %}
+    </table>
+  </body>
+</html>

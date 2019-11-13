@@ -50,4 +50,13 @@ We will evaluate you on your ability to solve the problem defined in the require
 If you have any questions regarding requirements, do not hesitate to email your contact at theScore for clarification.
 
 ### Installation and running this solution
-... TODO
+
+
+### ToDo List
+Here's a list of ToDo items which would complete this project by making a more cohesive user experience, help productionize this app, and so forth.
+
+* On page load set radio button according to sort settting.  This would aid UI experience under the principle visibility of system status.
+
+
+### Framework Selection and Design Considerations
+Most of my experience writing production applications is in Python so that's the language used here.  I then selected Tornado as the web app Framework.  
