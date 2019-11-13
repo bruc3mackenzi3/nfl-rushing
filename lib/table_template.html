@@ -1,31 +1,45 @@
 <html>
+  <!doctype html>
+  <html lang="en">
   <head>
-    <title>{{ title }}</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <!-- Ensures responsive pages-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>{{ title }}</title>
   </head>
   <body>
+    <div class="container-fluid">
     <h1>{{ title }}</h1>
 
     <form action="/rushing">
       <p>
-      Sort by a given attribute:<br>
-      <input type="radio" name="sortBy" value="none"> None
-      <input type="radio" name="sortBy" value="total_rushing_yards"> Total Rushing Yards
-      <input type="radio" name="sortBy" value="longest_rush"> Longest Rush
-      <input type="radio" name="sortBy" value="total_rushing_touchdowns"> Total Rushing Touchdowns
+        Sort by a given attribute:<br>
+        <input type="radio" name="sortBy" value="none"> None
+        <input type="radio" name="sortBy" value="total_rushing_yards"> Total Rushing Yards
+        <input type="radio" name="sortBy" value="longest_rush"> Longest Rush
+        <input type="radio" name="sortBy" value="total_rushing_touchdowns"> Total Rushing Touchdowns
       </p>
 
       <p>
-      Filter by a given Player's Name:<br>
-      <input type="text" name="filterBy">
+        Filter by a given Player's Name:<br>
+        <input type="text" name="filterBy">
+      </p>
+
+      <p>
+        <input type="checkbox" name="export"> Export data to CSV
       </p>
       
       <p>
-      <input type="submit" value="Submit">
+        <input type="submit" value="Submit">
       </p>
     </form>
 
-    <table class="table-dark">
+    <table class="table-bordered">
       <tr>
         {% for field in rushing_fields %}
           <th>{{field[-1]}}</th>
@@ -42,5 +56,6 @@
       </tr>
       {% end %}
     </table>
+  </div>
   </body>
 </html>

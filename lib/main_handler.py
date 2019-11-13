@@ -9,21 +9,22 @@ class MainHandler(tornado.web.RequestHandler):
         # Start by parsing arguments
         sort_by = self.get_argument('sortBy', 'none')
         filter_by = self.get_argument('filterBy', '')
-        print('DEBUG: sortBy: {} filterBy: {}'.format(sort_by, filter_by))
+        export = self.get_argument('export', '')
+        print('DEBUG: sortBy: {} filterBy: {} export: {}'.format(sort_by, filter_by, export))
 
         # Select appropriately sorted dataset
-        if sort_by == 'total_rushing_yards':
-            data = self.rushing_data.data_yds
-        elif sort_by == 'longest_rush':
-            data = self.rushing_data.data_lng
-        elif sort_by == 'total_rushing_touchdowns':
-            data = self.rushing_data.data_td
-        # Base case if sortBy is set to none, missing, or anything erroneous
-        else:
-            data = self.rushing_data.data
+        data = self.rushing_data.get_dataset(sort_by)
 
-        self.render('table_template.html',
-                    title='NFL Rushings',
-                    rushing_fields=self.rushing_data.fields,
-                    rushing_data=data,
-                    name_filter=filter_by)
+        if export == 'on':
+            self.export_csv(sort_by, filter_by)
+        else:
+            self.render('table_template.html',
+                        title='NFL Rushings',
+                        rushing_fields=self.rushing_data.fields,
+                        rushing_data=data,
+                        name_filter=filter_by)
+
+    def export_csv(self, sort_by, filter_by):
+        self.set_header('Content-Type','text/csv')
+        self.set_header('content-Disposition','attachment; filename=rushing.csv')
+        self.write(self.rushing_data.to_csv(sort_by, filter_by))

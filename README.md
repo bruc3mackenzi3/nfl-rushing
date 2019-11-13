@@ -71,3 +71,18 @@ Here's a list of ToDo items which would complete this project by making a more c
 
 * On page load set radio button according to sort settting.  This would aid UI experience under the principle visibility of system status.
 * Port hardcoded variables to config file.
+
+### Framework Selection and Design Considerations
+Most of my experience writing production applications is in Python so that's the language used here.  I then selected Tornado as the web app Framework.
+
+Since I'm a backend developer the front end is rather rudimentary.  However, bootstrap is used to keep the app easy on the eyes.  It's alsoloaded from a CDN providing some scalability out of the box.  But no frameworks or even JS is used; it's otherwise raw HTML but it's enough to get the job done.
+
+
+The backend has more shiney features.
+
+One easy trap to fall into is modifying state on each request.  Such errors may not show up when testing with a single client but can produce strange behaviour like missing data when testing with multiple users.  Still I will acknowledge this is reliant on bug-free programming and there's nothing stopping an accidental state modification from occuring with even a small code change.
+
+### Feature Design Rationale
+I decided to implement the NFL Rushings app as a single page.  This keeps things simple and cohesive, as well allows the features to work complementary to one another rather than on their own.  This is especially powerful for the CSV export, allowing users to easily export the exact data they're looking at.
+
+All features are implemented server-side, however the CSV export and possibly filtering might better be implemented client-side.  They would certainly help the app scale by taking computational demand away from the server.

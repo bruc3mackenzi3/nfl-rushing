@@ -51,7 +51,48 @@ class RushingData:
 
         self._precache_sorted_data()
     
-    # Helper function to clean data as it's loaded
+    def to_csv(self, dataset_name, name_filter=None):
+        ''' Convert one of the datasets to a CSV with optional Player name
+        filtering.
+        '''
+
+        dataset = self.get_dataset(dataset_name)
+
+        # Pythonic one-liner to build the header list using the short form field
+        # names
+        csv_data = '\t'.join(list(map(lambda x: x[0], self.fields)))
+
+        for record in dataset:
+            # Filter feature - skip if the filter's set and there's no match
+            if name_filter and not name_filter.lower() in record['Player'].lower():
+                continue
+
+            record_csv = '\n'
+            for field in self.fields:
+                record_csv += str(record[field[0]]) + '\t'
+            csv_data += record_csv.rstrip('\t')
+
+        return csv_data
+
+    def get_dataset(self, dataset_name):
+        '''Helper function to retrieve the appropriate dataset based on the
+        corresponding name.
+        
+        To reflect the behaviour in the front-end a no match simply returns the
+        original dataset.
+        '''
+
+        if dataset_name == 'total_rushing_yards':
+            return self.data_yds
+        elif dataset_name == 'longest_rush':
+            return self.data_lng
+        elif dataset_name == 'total_rushing_touchdowns':
+            return self.data_td
+        # Base case if sortBy is set to none, missing, or anything erroneous
+        else:
+            return self.data
+
+    # Private helper function to clean data as it's loaded
     # Known issues with data include ints set as strings e.g. "Yds":"1,043"
     def _clean_data(self):
         for d in self.data:
