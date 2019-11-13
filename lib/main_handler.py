@@ -19,10 +19,10 @@ class MainHandler(tornado.web.RequestHandler):
             self.export_csv(sort_by, filter_by)
         else:
             self.render('table_template.html',
-                        title='NFL Rushings',
                         rushing_fields=self.rushing_data.fields,
-                        rushing_data=data,
-                        name_filter=filter_by)
+                        sort_by=sort_by,
+                        name_filter=filter_by,
+                        rushing_data=data)
 
     def export_csv(self, sort_by, filter_by):
         self.set_header('Content-Type','text/csv')

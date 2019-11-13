@@ -10,24 +10,24 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>{{ title }}</title>
+    <title>NFL Rushings</title>
   </head>
   <body>
     <div class="container-fluid">
-    <h1>{{ title }}</h1>
+    <h1>NFL Rushings</h1>
 
     <form action="/rushing">
       <p>
         Sort by a given attribute:<br>
-        <input type="radio" name="sortBy" value="none"> None
-        <input type="radio" name="sortBy" value="total_rushing_yards"> Total Rushing Yards
-        <input type="radio" name="sortBy" value="longest_rush"> Longest Rush
-        <input type="radio" name="sortBy" value="total_rushing_touchdowns"> Total Rushing Touchdowns
+        <input type="radio" name="sortBy" value="none" {% if sort_by == 'none' %} checked {% end %}> None
+        <input type="radio" name="sortBy" value="total_rushing_yards" {% if sort_by == 'total_rushing_yards' %} checked {% end %}> Total Rushing Yards
+        <input type="radio" name="sortBy" value="longest_rush" {% if sort_by == 'longest_rush' %} checked {% end %}> Longest Rush
+        <input type="radio" name="sortBy" value="total_rushing_touchdowns" {% if sort_by == 'total_rushing_touchdowns' %} checked {% end %}> Total Rushing Touchdowns
       </p>
 
       <p>
         Filter by a given Player's Name:<br>
-        <input type="text" name="filterBy">
+        <input type="text" name="filterBy" value="{{name_filter}}">
       </p>
 
       <p>
