@@ -12,11 +12,12 @@ import main_handler
 import rushing_data
 
 
-# workaround for Windows
-import asyncio
-asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-
 port = 8888
+
+# workaround for Windows
+if 'win' in sys.platform.lower():
+    import asyncio
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 def build_web_app():
     # Load rushing.json
