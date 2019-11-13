@@ -51,12 +51,23 @@ If you have any questions regarding requirements, do not hesitate to email your 
 
 ### Installation and running this solution
 
+#### Installing
+Python 3 is required.  This comes pre installed on most modern linux distros.  Windows or Mac users may need to install it manually from https://www.python.org/downloads/.  If you have Python installed but aren't sure of the version check by running `python --version`.
+
+This app isn't tested with Python 2.  The app should be cross platform but has only been tested on Windows.
+
+Install Python dependencies by running this from the root project folder:
+`pip install -r requirements.txt`
+
+#### Running
+From the command line simply run:
+`python bin/down_set_hut.py`
+
+then visit http://localhost:8888/rushing and test out the various features!
+
 
 ### ToDo List
 Here's a list of ToDo items which would complete this project by making a more cohesive user experience, help productionize this app, and so forth.
 
 * On page load set radio button according to sort settting.  This would aid UI experience under the principle visibility of system status.
-
-
-### Framework Selection and Design Considerations
-Most of my experience writing production applications is in Python so that's the language used here.  I then selected Tornado as the web app Framework.  
+* Port hardcoded variables to config file.

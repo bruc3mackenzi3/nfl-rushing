@@ -7,14 +7,23 @@
     <h1>{{ title }}</h1>
 
     <form action="/rushing">
-      <p>Sort by a given attribute:</p>
-        <input type="radio" name="sortBy" value="none"> None
-        <input type="radio" name="sortBy" value="total_rushing_yards"> Total Rushing Yards
-        <input type="radio" name="sortBy" value="longest_rush"> Longest Rush
-        <input type="radio" name="sortBy" value="total_rushing_touchdowns"> Total Rushing Touchdowns
+      <p>
+      Sort by a given attribute:<br>
+      <input type="radio" name="sortBy" value="none"> None
+      <input type="radio" name="sortBy" value="total_rushing_yards"> Total Rushing Yards
+      <input type="radio" name="sortBy" value="longest_rush"> Longest Rush
+      <input type="radio" name="sortBy" value="total_rushing_touchdowns"> Total Rushing Touchdowns
+      </p>
 
-        <input type="submit" value="Sort">
-      </form>
+      <p>
+      Filter by a given Player's Name:<br>
+      <input type="text" name="filterBy">
+      </p>
+      
+      <p>
+      <input type="submit" value="Submit">
+      </p>
+    </form>
 
     <table class="table-dark">
       <tr>
@@ -22,13 +31,16 @@
           <th>{{field[-1]}}</th>
         {% end %}
       </tr>
-        {% for item in rushing_data %}
-        <tr>
-            {% for field in rushing_fields %}
-              <td>{{item[field[0]]}}</td>
-            {% end %}
-        </tr>
-        {% end %}
+      {% for item in rushing_data %}
+      <tr>
+          {% if name_filter != '' and not name_filter.lower() in item['Player'].lower() %}
+            {% continue %}
+          {% end %}
+          {% for field in rushing_fields %}
+            <td>{{item[field[0]]}}</td>
+          {% end %}
+      </tr>
+      {% end %}
     </table>
   </body>
 </html>

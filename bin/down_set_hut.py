@@ -16,6 +16,7 @@ import rushing_data
 import asyncio
 asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
+port = 8888
 
 def build_web_app():
     # Load rushing.json
@@ -32,7 +33,7 @@ def main():
     # Start web server
     print('Starting up web server!')
     server = tornado.httpserver.HTTPServer(app)
-    server.listen(8888)
+    server.listen(port)
     tornado.ioloop.IOLoop.instance().start()
 
 

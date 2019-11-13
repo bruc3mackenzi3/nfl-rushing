@@ -8,8 +8,10 @@ class MainHandler(tornado.web.RequestHandler):
     def get(self):
         # Start by parsing arguments
         sort_by = self.get_argument('sortBy', 'none')
-        print('DEBUG: sort: ' + sort_by)
+        filter_by = self.get_argument('filterBy', '')
+        print('DEBUG: sortBy: {} filterBy: {}'.format(sort_by, filter_by))
 
+        # Select appropriately sorted dataset
         if sort_by == 'total_rushing_yards':
             data = self.rushing_data.data_yds
         elif sort_by == 'longest_rush':
@@ -23,4 +25,5 @@ class MainHandler(tornado.web.RequestHandler):
         self.render('table_template.html',
                     title='NFL Rushings',
                     rushing_fields=self.rushing_data.fields,
-                    rushing_data=data)
+                    rushing_data=data,
+                    name_filter=filter_by)
