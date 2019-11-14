@@ -76,3 +76,7 @@ One easy trap to fall into is modifying state on each request.  Such errors may 
 I decided to implement the NFL Rushings app as a single page.  This keeps things simple and cohesive, as well allows the features to work complementary to one another rather than on their own.  This is especially powerful for the CSV export, allowing users to easily export the exact data they're looking at.
 
 All features are implemented server-side, however the CSV export and possibly filtering might better be implemented client-side.  They would certainly help the app scale by taking computational demand away from the server.
+
+PEP8 style guide is followed to keep the code format consistent.
+
+Commenting is somewhat sparse but is intended to explain only what's necessary rather than be present everywhere for the sake of it.
