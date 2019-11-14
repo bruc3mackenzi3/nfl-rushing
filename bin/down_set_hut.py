@@ -19,6 +19,7 @@ if 'win' in sys.platform.lower():
     import asyncio
     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
+
 def build_web_app():
     # Load rushing.json
     rush_data = rushing_data.RushingData()
@@ -32,7 +33,7 @@ def main():
     app = build_web_app()
 
     # Start web server
-    print('Starting up web server!')
+    print('Starting up web server, listening on port ' + str(port))
     server = tornado.httpserver.HTTPServer(app)
     server.listen(port)
     tornado.ioloop.IOLoop.instance().start()

@@ -10,7 +10,7 @@ class MainHandler(tornado.web.RequestHandler):
         sort_by = self.get_argument('sortBy', 'none')
         filter_by = self.get_argument('filterBy', '')
         export = self.get_argument('export', '')
-        print('DEBUG: sortBy: {} filterBy: {} export: {}'.format(sort_by, filter_by, export))
+        # print('DEBUG: sortBy: {} filterBy: {} export: {}'.format(sort_by, filter_by, export))
 
         # Select appropriately sorted dataset
         data = self.rushing_data.get_dataset(sort_by)
