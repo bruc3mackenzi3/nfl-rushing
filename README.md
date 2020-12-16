@@ -1,3 +1,35 @@
+# NFL Rushing Stats Web App
+
+## Installing
+The Rushings app is Python 2 and 3 compatible.  Python can be installed from https://www.python.org/downloads/.  Note pip and setuptools are also required.  Also note testing has only been done on Windows and Linux.
+
+Install Python dependencies by running this from the root project folder:
+```pip install -r requirements.txt```
+
+## Running
+From the command line simply run:
+```python bin/down_set_hut.py```
+
+then visit http://localhost:8888/rushing and test out the various features!
+
+## Framework Selection and Design Considerations
+Most of my experience writing production applications is in Python so that's the language used here.  I then selected Tornado as the web app framework for the same reason.
+
+Since I'm a backend developer the front end is rather rudimentary.  However, bootstrap is used to keep the app easy on the eyes.  It's also loaded from a CDN providing some scalability out of the box.  But no frameworks or even JS is used; it's otherwise raw HTML but it's enough to get the job done.
+
+The backend is where the heavy lifting is done.  On bootup the JSON file is loaded into memory.  A database would bring some benefits but given the small file size utilizing server memory is nice.  Because all the work is done in Python the web server is blocking.  This of course makes scaling an issue so if the objective were to serve as many users as possible a database with an asynchronous server would scale better.
+
+One easy trap to fall into is modifying state on each request.  Such errors may not show up when testing with a single client but can produce strange behaviour like missing data when testing with multiple users.  Still I will acknowledge this is reliant on bug-free programming and there's nothing stopping an accidental state modification from occuring with even a small code change.
+
+## Feature Design Rationale
+I decided to implement the NFL Rushings app as a single page.  This keeps things simple and cohesive, as well allows the features to work complementary to one another rather than on their own.  This is especially powerful for the CSV export, allowing users to easily export the exact data they're looking at.
+
+All features are implemented server-side, however the CSV export and possibly filtering might better be implemented client-side.  They would certainly help the app scale by taking computational demand away from the server.
+
+PEP8 style guide is followed to keep the code format consistent.
+
+Commenting is somewhat sparse but is intended to explain only what's necessary rather than be present everywhere for the sake of it.
+
 # theScore "the Rush" Interview Question
 At theScore, we are always looking for intelligent, resourceful, full-stack developers to join our growing team. To help us evaluate new talent, we have created this take-home interview question. This question should take you no more than a few hours.
 
@@ -48,35 +80,3 @@ We will evaluate you on your ability to solve the problem defined in the require
 
 ### Help
 If you have any questions regarding requirements, do not hesitate to email your contact at theScore for clarification.
-
-### Installation and running this solution
-
-#### Installing
-The Rushings app is Python 2 and 3 compatible.  Python can be installed from https://www.python.org/downloads/.  Note pip and setuptools are also required.  Also note testing has only been done on Windows and Linux.
-
-Install Python dependencies by running this from the root project folder:
-```pip install -r requirements.txt```
-
-#### Running
-From the command line simply run:
-```python bin/down_set_hut.py```
-
-then visit http://localhost:8888/rushing and test out the various features!
-
-### Framework Selection and Design Considerations
-Most of my experience writing production applications is in Python so that's the language used here.  I then selected Tornado as the web app framework for the same reason.
-
-Since I'm a backend developer the front end is rather rudimentary.  However, bootstrap is used to keep the app easy on the eyes.  It's also loaded from a CDN providing some scalability out of the box.  But no frameworks or even JS is used; it's otherwise raw HTML but it's enough to get the job done.
-
-The backend is where the heavy lifting is done.  On bootup the JSON file is loaded into memory.  A database would bring some benefits but given the small file size utilizing server memory is nice.  Because all the work is done in Python the web server is blocking.  This of course makes scaling an issue so if the objective were to serve as many users as possible a database with an asynchronous server would scale better.
-
-One easy trap to fall into is modifying state on each request.  Such errors may not show up when testing with a single client but can produce strange behaviour like missing data when testing with multiple users.  Still I will acknowledge this is reliant on bug-free programming and there's nothing stopping an accidental state modification from occuring with even a small code change.
-
-### Feature Design Rationale
-I decided to implement the NFL Rushings app as a single page.  This keeps things simple and cohesive, as well allows the features to work complementary to one another rather than on their own.  This is especially powerful for the CSV export, allowing users to easily export the exact data they're looking at.
-
-All features are implemented server-side, however the CSV export and possibly filtering might better be implemented client-side.  They would certainly help the app scale by taking computational demand away from the server.
-
-PEP8 style guide is followed to keep the code format consistent.
-
-Commenting is somewhat sparse but is intended to explain only what's necessary rather than be present everywhere for the sake of it.
